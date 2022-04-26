@@ -59,7 +59,7 @@ public class EmployeeWage {
             here we calculate the Daily Wages And Print them
              */
             dailyWage = workingHrs * WAGE_PER_HR;
-            //System.out.println("Day " + day + " workingHrs is " + workingHrs + " wage is: " + dailyWage);
+            System.out.println("Day " + day + " workingHrs is " + workingHrs + " wage is: " + dailyWage);
             totalWage += dailyWage;
         }
         /*
