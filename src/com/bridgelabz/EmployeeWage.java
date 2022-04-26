@@ -14,21 +14,28 @@ public class EmployeeWage {
     public static final int MAX_WORKING_DAYS = 20;
     public static final int WAGE_PER_HR = 20;
     public static final int MAX_WORKING_HRS = 100;
+
     /*
     Used the ComputeEmpWage() Method to Compute the Attendance, Calculate Daily Employee Wage,
     Wages for a Month,Refactor the Code.
      */
-    public void ComputeEmpWage()
-    {
+    public void ComputeEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs) {
+
+        System.out.println("Details of " + companyName + " employee");
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Wage per hour:" + wagePerHr);
+        System.out.println("Maximum working days:" + maxWorkingDays);
+        System.out.println("Maximum working hours:" + maxWorkingHrs);
+
         Random random = new Random();
 
         int totalWage = 0;
         int dailyWage;
-        int workingHrs = 0;
-        int day = 1, totalWorkingHrs = 0;
+        int workingHrs;
+        int day,totalWorkingHrs;
 
-        for (day = 1, totalWorkingHrs = 0; day <= MAX_WORKING_DAYS
-                && totalWorkingHrs < MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs) {
+
+        for (day = 1, totalWorkingHrs = 0; day <= MAX_WORKING_DAYS && totalWorkingHrs < MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs) {
             int present = random.nextInt(3);
                 /*
                 Here we Used switch case for Attendance.
@@ -52,13 +59,14 @@ public class EmployeeWage {
             here we calculate the Daily Wages And Print them
              */
             dailyWage = workingHrs * WAGE_PER_HR;
-            System.out.println("Day " + day + " workingHrs is " + workingHrs + " wage is: " + dailyWage);
+            //System.out.println("Day " + day + " workingHrs is " + workingHrs + " wage is: " + dailyWage);
             totalWage += dailyWage;
         }
         /*
         Printed the Total Wage.
          */
         System.out.println("Total wage for a month is " + totalWage);
+        System.out.println("-----------------------------------------------------\n ");
     }
 
     public static void main(String[] args) {
@@ -67,8 +75,8 @@ public class EmployeeWage {
         Created The EmployeeWage Class Object and calling the ComputeEmpWage();
          */
         EmployeeWage ewc = new EmployeeWage();
-        ewc.ComputeEmpWage();
-
+        ewc.ComputeEmpWage("Amazon", 40, 15, 200);
+        ewc.ComputeEmpWage("BigBazar", 20, 20, 100);
 
 
     }
