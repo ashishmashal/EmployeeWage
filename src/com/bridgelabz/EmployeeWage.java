@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 interface IEmployeeWageComputation
@@ -51,21 +52,25 @@ public class EmployeeWage implements IEmployeeWageComputation
     public static final int FULL_TIME = 2;
     // instance variables
     ArrayList<CompanyEmpWage> companies;
+    HashMap<String,Integer> totalEMPWage;
 
 
     public EmployeeWage()
     {
        companies = new ArrayList<>();
+        totalEMPWage = new HashMap<>();
     }
 
     public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
     {
         /*
-        Adding All Company Wages In ArrayList
-        using companies.add(company);
+        Adding All Company Wages In HashMAps
+        using totalEMPWage.put(companyName,0);
+
          */
         CompanyEmpWage company = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
         companies.add(company);
+        totalEMPWage.put(companyName,0);
     }
 
     int generateEmployeeType()
@@ -108,9 +113,20 @@ public class EmployeeWage implements IEmployeeWageComputation
             totalWage += wage;
             System.out.printf("%5d       %5d      %5d      %5d\n", day, workingHrs, wage, totalWorkingHrs + workingHrs);
         }
+        //Calculating hashmaps Total Emp Wages
+        totalEMPWage.put(companyEmpWage.COMPANY_NAME,totalWage);
         return totalWage;
     }
+    //Printing This All Company and Their total Employee Wages.
+    void printTotalEmpWages()
+    {
+        System.out.println("The Companies and their total Employee Wages are:");
+        for (String companyName : totalEMPWage.keySet())
+        {
+            System.out.println(companyName + ": " + totalEMPWage.get(companyName));
+        }
 
+    }
     public static void main(String[] args)
     {
         EmployeeWage employeewaagecomputation = new EmployeeWage();
@@ -118,6 +134,7 @@ public class EmployeeWage implements IEmployeeWageComputation
         employeewaagecomputation.addCompany("Google", 5, 40, 170);
         employeewaagecomputation.addCompany("Apple", 9, 10, 70);
         employeewaagecomputation.calculateTotalWage();
+        employeewaagecomputation.printTotalEmpWages();
     }
 }
 
