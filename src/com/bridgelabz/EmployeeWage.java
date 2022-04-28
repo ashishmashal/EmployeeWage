@@ -9,6 +9,8 @@ interface IEmployeeWageComputation
     public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
 
     public void calculateTotalWage();
+
+    public int getTotalEmpWage(String companyName);
 }
 
 class CompanyEmpWage
@@ -21,6 +23,7 @@ class CompanyEmpWage
     // instance variable
     int totalEmpWage;
 
+    //parameterized constructor to get and set the values
     CompanyEmpWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
     {
         COMPANY_NAME = companyName;
@@ -54,7 +57,7 @@ public class EmployeeWage implements IEmployeeWageComputation
     ArrayList<CompanyEmpWage> companies;
     HashMap<String,Integer> totalEMPWage;
 
-
+    //default constructor
     public EmployeeWage()
     {
        companies = new ArrayList<>();
@@ -118,14 +121,9 @@ public class EmployeeWage implements IEmployeeWageComputation
         return totalWage;
     }
     //Printing This All Company and Their total Employee Wages.
-    void printTotalEmpWages()
+    public int getTotalEmpWage(String companyName)
     {
-        System.out.println("The Companies and their total Employee Wages are:");
-        for (String companyName : totalEMPWage.keySet())
-        {
-            System.out.println(companyName + ": " + totalEMPWage.get(companyName));
-        }
-
+        return totalEMPWage.get(companyName);
     }
     public static void main(String[] args)
     {
@@ -134,7 +132,9 @@ public class EmployeeWage implements IEmployeeWageComputation
         employeewaagecomputation.addCompany("Google", 5, 40, 170);
         employeewaagecomputation.addCompany("Apple", 9, 10, 70);
         employeewaagecomputation.calculateTotalWage();
-        employeewaagecomputation.printTotalEmpWages();
+        String query = "Microsoft";
+        int totalWage = employeewaagecomputation.getTotalEmpWage(query);
+        System.out.println("Total Employee Wage for " + query + " company is " + totalWage);
     }
 }
 
