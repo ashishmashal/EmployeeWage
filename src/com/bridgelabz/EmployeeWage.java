@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
-import java.util.Random;
+import java.util.ArrayList;
+
 
 interface IEmployeeWageComputation
 {
@@ -49,19 +50,22 @@ public class EmployeeWage implements IEmployeeWageComputation
     public static final int PART_TIME = 1;
     public static final int FULL_TIME = 2;
     // instance variables
-    int noOfCompanies, index;
-    CompanyEmpWage[] companies;
+    ArrayList<CompanyEmpWage> companies;
 
-    public EmployeeWage(int noOfCompanies)
+
+    public EmployeeWage()
     {
-        this.noOfCompanies = noOfCompanies;
-        companies = new CompanyEmpWage[noOfCompanies];
-        index = 0;
+       companies = new ArrayList<>();
     }
 
     public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
     {
-        companies[index++] = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
+        /*
+        Adding All Company Wages In ArrayList
+        using companies.add(company);
+         */
+        CompanyEmpWage company = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
+        companies.add(company);
     }
 
     int generateEmployeeType()
@@ -71,15 +75,11 @@ public class EmployeeWage implements IEmployeeWageComputation
 
     int getWorkingHrs(int empType)
     {
-        switch (empType)
-        {
-            case FULL_TIME:
-                return 8;
-            case PART_TIME:
-                return 4;
-            default:
-                return 0;
-        }
+        return switch (empType) {
+            case FULL_TIME -> 8;
+            case PART_TIME -> 4;
+            default -> 0;
+        };
     }
 
     public void calculateTotalWage()
@@ -111,9 +111,9 @@ public class EmployeeWage implements IEmployeeWageComputation
         return totalWage;
     }
 
-    public static void main(String args[])
+    public static void main(String[] args)
     {
-        EmployeeWage employeewaagecomputation = new EmployeeWage(3);
+        EmployeeWage employeewaagecomputation = new EmployeeWage();
         employeewaagecomputation.addCompany("Microsoft", 4, 30, 100);
         employeewaagecomputation.addCompany("Google", 5, 40, 170);
         employeewaagecomputation.addCompany("Apple", 9, 10, 70);
