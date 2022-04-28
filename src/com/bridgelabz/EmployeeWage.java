@@ -2,6 +2,13 @@ package com.bridgelabz;
 
 import java.util.Random;
 
+interface IEmployeeWageComputation
+{
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
+
+    public void calculateTotalWage();
+}
+
 class CompanyEmpWage
 {
     // instance constants
@@ -30,13 +37,13 @@ class CompanyEmpWage
     {
         System.out.println("Details of " + COMPANY_NAME + " employee");
         System.out.println("-----------------------------------------------------");
-        System.err.println("Wage per hour:" + WAGE_PER_HR);
+        System.out.println("Wage per hour:" + WAGE_PER_HR);
         System.out.println("Maximum working days:" + MAX_WORKING_DAYS);
         System.out.println("Maximum working hours:" + MAX_WORKING_HRS);
         return "Total wage for a month of " + COMPANY_NAME + " employee is " + totalEmpWage + "\n";
     }
 }
-public class EmployeeWage
+public class EmployeeWage implements IEmployeeWageComputation
 {
     // class constants
     public static final int PART_TIME = 1;
@@ -52,7 +59,7 @@ public class EmployeeWage
         index = 0;
     }
 
-    void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
     {
         companies[index++] = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
     }
@@ -75,7 +82,7 @@ public class EmployeeWage
         }
     }
 
-    void calculateTotalWage()
+    public void calculateTotalWage()
     {
         for (CompanyEmpWage company : companies)
         {
@@ -106,11 +113,11 @@ public class EmployeeWage
 
     public static void main(String args[])
     {
-        EmployeeWage employeeWageComputation = new EmployeeWage(3);
-        employeeWageComputation.addCompany("Microsoft", 4, 30, 100);
-        employeeWageComputation.addCompany("Google", 5, 40, 170);
-        employeeWageComputation.addCompany("Apple", 9, 10, 70);
-        employeeWageComputation.calculateTotalWage();
+        EmployeeWage employeewaagecomputation = new EmployeeWage(3);
+        employeewaagecomputation.addCompany("Microsoft", 4, 30, 100);
+        employeewaagecomputation.addCompany("Google", 5, 40, 170);
+        employeewaagecomputation.addCompany("Apple", 9, 10, 70);
+        employeewaagecomputation.calculateTotalWage();
     }
 }
 
